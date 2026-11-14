@@ -3,14 +3,15 @@ Primary classes for performing signing and verification operations.
 """
 
 import binascii
-from hashlib import sha1
+from hashlib import sha1, sha256
 import os
-from six import PY2
+from six import PY2, int2byte
 from . import ecdsa, eddsa
 from . import der, ssh
 from . import rfc6979
 from . import ellipticcurve
-from .curves import NIST192p, Curve, Ed25519, Ed448
+from . import numbertheory
+from .curves import NIST192p, Curve, Ed25519, Ed448, SECP256k1
 from .ecdsa import RSZeroError
 from .util import string_to_number, number_to_string, randrange
 from .util import sigencode_string, sigdecode_string, bit_length
@@ -24,7 +25,6 @@ from .util import (
 from ._compat import normalise_bytes
 from .errors import MalformedPointError
 from .ellipticcurve import PointJacobi, CurveEdTw
-
 
 __all__ = [
     "BadSignatureError",
@@ -86,6 +86,124 @@ def _truncate_and_convert_digest(digest, curve, allow_truncate):
         number >>= max(0, length - max_length)
 
     return number
+
+
+# Length of the recoverable compact signature: 1 byte of recovery id
+# followed by 32 bytes of r and 32 bytes of s, both big-endian.
+COMPACT_RECOVERABLE_SIGNATURE_LENGTH = 1 + 2 * SECP256k1.baselen
+
+
+def _decode_compact_recoverable(signature, digest):
+    """
+    Parse and validate a recoverable compact signature and its digest.
+
+    The signature must be exactly 65 bytes long: a single recovery id
+    byte (value 0 to 3), followed by the ``r`` and ``s`` parameters of the
+    ECDSA signature, each encoded as 32-byte big-endian integers. The
+    digest must be exactly 32 bytes long. Only low-S signatures are
+    accepted.
+
+    :param signature: the 65-byte recoverable compact signature
+    :type signature: :term:`bytes-like object`
+    :param digest: the 32-byte hash that was signed
+    :type digest: :term:`bytes-like object`
+
+    :raises BadDigestError: if the digest is not exactly 32 bytes long
+    :raises BadSignatureError: if the signature encoding is malformed or
+        the signature parameters are out of range
+
+    :return: tuple of recovery id, ``r``, ``s`` and the digest as an integer
+    :rtype: tuple(int, int, int, int)
+    """
+    signature = normalise_bytes(signature)
+    digest = normalise_bytes(digest)
+    if len(digest) != SECP256k1.baselen:
+        raise BadDigestError(
+            "recoverable compact signatures require a digest of exactly "
+            "{0} bytes, got {1}".format(SECP256k1.baselen, len(digest))
+        )
+    if len(signature) != COMPACT_RECOVERABLE_SIGNATURE_LENGTH:
+        raise BadSignatureError(
+            "recoverable compact signature must be exactly {0} bytes, "
+            "got {1}".format(
+                COMPACT_RECOVERABLE_SIGNATURE_LENGTH, len(signature)
+            )
+        )
+    rec_id = string_to_number(signature[:1])
+    if rec_id > 3:
+        raise BadSignatureError(
+            "recovery id must be between 0 and 3, got {0}".format(rec_id)
+        )
+    n = SECP256k1.order
+    r = string_to_number(signature[1 : 1 + SECP256k1.baselen])
+    s = string_to_number(signature[1 + SECP256k1.baselen :])
+    if not 1 <= r < n:
+        raise BadSignatureError("r parameter of signature out of range")
+    if not 1 <= s < n:
+        raise BadSignatureError("s parameter of signature out of range")
+    if s > n // 2:
+        raise BadSignatureError(
+            "high-S signatures are not allowed in the recoverable compact "
+            "format"
+        )
+    return rec_id, r, s, string_to_number(digest)
+
+
+def _recover_public_point_secp256k1(rec_id, r, s, number):
+    """
+    Recover the public key point from a recoverable compact signature.
+
+    Implements public key recovery for secp256k1: the recovery id selects
+    the ``x = r + j*n`` branch (bit 1) and the parity of the ``y``
+    coordinate (bit 0) of the ephemeral point ``R``, then the public key
+    is computed as ``Q = r^-1 * (s*R - e*G)``.
+
+    :param int rec_id: recovery id, must be between 0 and 3
+    :param int r: the ``r`` parameter of the signature, must be in [1, n-1]
+    :param int s: the ``s`` parameter of the signature, must be in [1, n-1]
+    :param int number: the signed digest as an integer
+
+    :raises BadSignatureError: if the ephemeral point cannot be constructed
+        (its x coordinate is outside of the field or does not correspond
+        to a curve point), if it is not in the correct subgroup, or if the
+        recovered public key is the point at infinity
+
+    :return: the recovered public key point
+    :rtype: ~ecdsa.ellipticcurve.PointJacobi
+    """
+    curve = SECP256k1.curve
+    generator = SECP256k1.generator
+    n = SECP256k1.order
+    p = curve.p()
+    # bit 1 of the recovery id selects the x = r + j*n branch
+    x = r + (rec_id >> 1) * n
+    if x >= p:
+        raise BadSignatureError(
+            "x coordinate of the ephemeral point outside of the field"
+        )
+    alpha = (pow(x, 3, p) + curve.a() * x + curve.b()) % p
+    try:
+        beta = numbertheory.square_root_mod_prime(alpha, p)
+    except numbertheory.SquareRootError:
+        raise BadSignatureError(
+            "x coordinate of the ephemeral point does not correspond "
+            "to a curve point"
+        )
+    # bit 0 of the recovery id selects the parity of the y coordinate
+    if (beta & 1) == (rec_id & 1):
+        y = beta
+    else:
+        y = p - beta
+    R = ellipticcurve.PointJacobi(curve, x, y, 1, n)
+    if n * R != ellipticcurve.INFINITY:
+        raise BadSignatureError("ephemeral point not in the correct subgroup")
+    r_inv = numbertheory.inverse_mod(r, n)
+    Q = r_inv * (s * R + (-number % n) * generator)
+    if Q == ellipticcurve.INFINITY:
+        raise BadSignatureError(
+            "recovered public key is the point at infinity"
+        )
+    return Q
 
 
 class VerifyingKey(object):
@@ -521,6 +639,44 @@ class VerifyingKey(object):
         ]
         return verifying_keys
 
+    @classmethod
+    def from_recoverable_compact_signature(
+        cls, signature, digest, hashfunc=sha256
+    ):
+        """
+        Recover the verifying key from a recoverable compact signature.
+
+        The signature must use the recoverable compact format: exactly
+        65 bytes, with the first byte being the recovery id (value 0 to
+        3), followed by the ``r`` and ``s`` parameters of the signature,
+        each encoded as a 32-byte big-endian integer. Only low-S
+        signatures over the secp256k1 curve are supported. Both
+        ``x = r`` and ``x = r + n`` branches of the recovery id are
+        handled.
+
+        Note: this operation is not constant-time, it must not be used
+        with secret data.
+
+        :param signature: the 65-byte recoverable compact signature
+        :type signature: :term:`bytes-like object`
+        :param digest: the 32-byte hash that was signed
+        :type digest: :term:`bytes-like object`
+        :param hashfunc: The default hash function that will be used for
+            verification with the returned key, needs to implement the same
+            interface as hashlib.sha256
+        :type hashfunc: callable
+
+        :raises BadDigestError: if the digest is not exactly 32 bytes long
+        :raises BadSignatureError: if the signature is malformed, uses
+            high-S, or no valid public key can be recovered from it
+
+        :return: Initialised VerifyingKey object on the secp256k1 curve
+        :rtype: VerifyingKey
+        """
+        rec_id, r, s, number = _decode_compact_recoverable(signature, digest)
+        point = _recover_public_point_secp256k1(rec_id, r, s, number)
+        return cls.from_public_point(point, SECP256k1, hashfunc)
+
     def to_string(self, encoding="raw"):
         """
         Convert the public key to a byte string.
@@ -739,6 +895,55 @@ class VerifyingKey(object):
         if self.pubkey.verifies(number, sig):
             return True
         raise BadSignatureError("Signature verification failed")
+
+    def verify_digest_recoverable_compact(self, signature, digest):
+        """
+        Verify a recoverable compact signature made over provided hash value.
+
+        The signature must use the recoverable compact format: exactly
+        65 bytes, with the first byte being the recovery id (value 0 to
+        3), followed by the ``r`` and ``s`` parameters of the signature,
+        each encoded as a 32-byte big-endian integer. Only low-S
+        signatures over the secp256k1 curve are supported.
+
+        In addition to checking the ECDSA equation, the method verifies
+        that the recovery id in the signature actually recovers the public
+        key of this VerifyingKey, so modifying the first byte of a valid
+        signature will cause the verification to fail even if ``r`` and
+        ``s`` are left unchanged.
+
+        Note: this operation is not constant-time, it must not be used
+        with secret data.
+
+        :param signature: the 65-byte recoverable compact signature
+        :type signature: :term:`bytes-like object`
+        :param digest: the 32-byte hash that the signature authenticates
+        :type digest: :term:`bytes-like object`
+
+        :raises ValueError: if this key is not on the secp256k1 curve
+        :raises BadDigestError: if the digest is not exactly 32 bytes long
+        :raises BadSignatureError: if the signature is malformed, uses
+            high-S, does not satisfy the ECDSA equation, or its recovery
+            id does not recover this key
+
+        :return: True if the verification was successful
+        :rtype: bool
+        """
+        if self.curve != SECP256k1:
+            raise ValueError(
+                "recoverable compact signatures are supported only "
+                "on the secp256k1 curve"
+            )
+        rec_id, r, s, number = _decode_compact_recoverable(signature, digest)
+        point = _recover_public_point_secp256k1(rec_id, r, s, number)
+        sig = ecdsa.Signature(r, s)
+        if not self.pubkey.verifies(number, sig):
+            raise BadSignatureError("Signature verification failed")
+        if point != self.pubkey.point:
+            raise BadSignatureError(
+                "recovery id does not recover this public key"
+            )
+        return True
 
 
 class SigningKey(object):
@@ -1453,6 +1658,105 @@ class SigningKey(object):
                 retry_gen += 1
 
         return sigencode(r, s, order)
+
+    def sign_digest_recoverable_compact(
+        self, digest, hashfunc=None, extra_entropy=b""
+    ):
+        """
+        Create a recoverable compact signature for digest using the
+        deterministic RFC6979 algorithm.
+
+        `digest` should be the output of a cryptographically secure hash
+        function like SHA256 or SHA-3-256, exactly 32 bytes long.
+
+        The returned signature uses the recoverable compact format:
+        exactly 65 bytes, with the first byte being the recovery id
+        (value 0 to 3), followed by the ``r`` and ``s`` parameters of the
+        signature, each encoded as a 32-byte big-endian integer. Bit 0 of
+        the recovery id is the parity of the ``y`` coordinate of the
+        ephemeral point, bit 1 selects the ``x = r + j*n`` branch of its
+        ``x`` coordinate. The signature is always normalised to low-S;
+        when ``s`` is replaced with ``n - s`` the parity bit of the
+        recovery id is flipped accordingly, so the signature always
+        recovers the public key of this SigningKey.
+
+        Only the secp256k1 curve is supported.
+
+        Note: this operation is not constant-time, it must not be used
+        in contexts where the signed data or the key may leak through
+        timing side channels of the Python interpreter.
+
+        :param digest: hash of data that will be signed, exactly 32 bytes
+        :type digest: :term:`bytes-like object`
+        :param hashfunc: hash function to use for computing the random "k"
+            value from RFC6979 process,
+            if unspecified, the default hash function selected during
+            object initialisation will be used (see
+            :attr:`.VerifyingKey.default_hashfunc`). The object needs to
+            implement
+            the same interface as :func:`~hashlib.sha1` from :py:mod:`hashlib`.
+        :type hashfunc: callable
+        :param extra_entropy: additional data that will be fed into the random
+            number generator used in the RFC6979 process. Entirely optional.
+        :type extra_entropy: :term:`bytes-like object`
+
+        :raises ValueError: if this key is not on the secp256k1 curve
+        :raises BadDigestError: if the digest is not exactly 32 bytes long
+
+        :return: the 65-byte recoverable compact signature
+        :rtype: bytes
+        """
+        if self.curve != SECP256k1:
+            raise ValueError(
+                "recoverable compact signatures are supported only "
+                "on the secp256k1 curve"
+            )
+        hashfunc = hashfunc or self.default_hashfunc
+        digest = normalise_bytes(digest)
+        extra_entropy = normalise_bytes(extra_entropy)
+        if len(digest) != self.curve.baselen:
+            raise BadDigestError(
+                "recoverable compact signatures require a digest of "
+                "exactly {0} bytes, got {1}".format(
+                    self.curve.baselen, len(digest)
+                )
+            )
+        n = self.curve.order
+        number = string_to_number(digest)
+        secexp = self.privkey.secret_multiplier
+
+        retry_gen = 0
+        while True:
+            k = rfc6979.generate_k(
+                n,
+                secexp,
+                hashfunc,
+                digest,
+                retry_gen=retry_gen,
+                extra_entropy=extra_entropy,
+            )
+            try:
+                r, s = self.sign_number(number, k=k)
+            except RSZeroError:
+                retry_gen += 1
+                continue
+            # k*G is the same ephemeral point that sign_number used
+            # internally, recompute it to learn the recovery id
+            point = k * self.curve.generator
+            rec_id = point.y() & 1
+            if point.x() >= n:
+                rec_id |= 2
+            if s > n // 2:
+                # normalise to low-S; negating s negates the ephemeral
+                # point, so the y parity bit of the recovery id must be
+                # flipped to keep the signature bound to this key
+                s = n - s
+                rec_id ^= 1
+            break
+
+        return (
+            int2byte(rec_id) + number_to_string(r, n) + number_to_string(s, n)
+        )
 
     def sign(
         self,
