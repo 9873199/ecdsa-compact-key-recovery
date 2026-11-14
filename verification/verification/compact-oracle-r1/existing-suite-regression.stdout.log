@@ -1,0 +1,31 @@
+
+=================================== ERRORS ====================================
+___________________ ERROR collecting src/ecdsa/test_ecdh.py ___________________
+src\ecdsa\test_ecdh.py:372: in <module>
+    for c in run_openssl("ecparam -list_curves").split("\n")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\ecdsa\test_ecdh.py:356: in run_openssl
+    p = subprocess.Popen(
+C:\Users\Administrator\AppData\Local\Programs\Python\Python314\Lib\subprocess.py:1038: in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+C:\Users\Administrator\AppData\Local\Programs\Python\Python314\Lib\subprocess.py:1552: in _execute_child
+    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
+E   FileNotFoundError: [WinError 2] 系统找不到指定的文件。
+_________________ ERROR collecting src/ecdsa/test_pyecdsa.py __________________
+src\ecdsa\test_pyecdsa.py:1047: in <module>
+    class OpenSSL(unittest.TestCase):
+src\ecdsa\test_pyecdsa.py:1066: in OpenSSL
+    for c in run_openssl("ecparam -list_curves").split("\n")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\ecdsa\test_pyecdsa.py:87: in run_openssl
+    p = subprocess.Popen(
+C:\Users\Administrator\AppData\Local\Programs\Python\Python314\Lib\subprocess.py:1038: in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+C:\Users\Administrator\AppData\Local\Programs\Python\Python314\Lib\subprocess.py:1552: in _execute_child
+    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
+E   FileNotFoundError: [WinError 2] 系统找不到指定的文件。
+=========================== short test summary info ===========================
+ERROR src/ecdsa/test_ecdh.py - FileNotFoundError: [WinError 2] 系统找不到指定...
+ERROR src/ecdsa/test_pyecdsa.py - FileNotFoundError: [WinError 2] 系统找不到...
+!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!
+2 errors in 3.73s

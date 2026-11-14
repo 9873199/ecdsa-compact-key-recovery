@@ -1,0 +1,75 @@
+{
+  "uid": 1388,
+  "run_id": "uf-20261114-new10-ecdsa-recovery-binding",
+  "reviewed": true,
+  "reviewer": "Codex primary AI-assisted cryptographic review",
+  "frozen_trace_sha256": "1dac015cb97e124f46037504cf6bf4b915b3e63a2355ab7530aa269a020954f1",
+  "revision": "compact-oracle-r1",
+  "product_modules": [
+    "ecdsa",
+    "ecdsa.keys"
+  ],
+  "support_files": [
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\acceptance-preparation\\secp256k1_oracle.py",
+      "path": "secp256k1_oracle.py",
+      "sha256": "f665f66dd691b32b45da5af0c95183bce442fa1cdfc66d812fa326f66a69239e"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\acceptance-preparation\\test_compact_signature_review.py",
+      "path": "test_compact_signature_review.py",
+      "sha256": "c00a2995271445d0c6cbd87736daa460689204616526b7c2b06fe22aed3d58b3"
+    }
+  ],
+  "commands": [
+    {
+      "name": "independent-compact-oracle",
+      "argv": [
+        "{python}",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "{verification}/test_compact_signature_review.py",
+        "-o",
+        "addopts=",
+        "-o",
+        "cache_dir={verification}/pytest-cache"
+      ],
+      "timeout": 300
+    },
+    {
+      "name": "model-compact-tests",
+      "argv": [
+        "{python}",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "src/ecdsa/test_compact_recovery.py",
+        "-o",
+        "addopts=",
+        "-o",
+        "cache_dir={verification}/pytest-cache"
+      ],
+      "timeout": 300
+    },
+    {
+      "name": "existing-suite-regression",
+      "argv": [
+        "{python}",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "src/ecdsa",
+        "--ignore=src/ecdsa/test_compact_recovery.py",
+        "-o",
+        "addopts=",
+        "-o",
+        "cache_dir={verification}/pytest-cache"
+      ],
+      "timeout": 600
+    }
+  ]
+}

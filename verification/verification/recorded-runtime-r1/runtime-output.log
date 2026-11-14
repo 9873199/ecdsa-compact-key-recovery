@@ -1,0 +1,11 @@
+Offline signature / generated test key
+Encoded length: 65 bytes
+Recovery id: 1
+Low-S: True
+Bound-key verification: True
+Recovered key matches: True
+Classic verification: True
+Changed recovery id: rejected
+Changed digest: rejected
+Short signature: rejected
+All demonstrated checks passed.

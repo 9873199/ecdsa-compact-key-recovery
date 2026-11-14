@@ -1,0 +1,28 @@
+{
+  "time": "2026-11-14T21:04:31+08:00",
+  "uid": 1388,
+  "status": "PASS",
+  "single_native_trace": "D:\\hc\\userFeedback\\cache\\runs\\uf-20261114-new10-ecdsa-recovery-binding\\frozen\\trajectory-original.jsonl",
+  "trace_sha256": "1dac015cb97e124f46037504cf6bf4b915b3e63a2355ab7530aa269a020954f1",
+  "session_id": "74bac6a9-4801-478b-8df8-53168b893be6",
+  "prompt_id": "a48b4e07-b5e4-4cb4-9e60-84b6faad8e5f",
+  "exact_single_prompt": true,
+  "native_models": [
+    "auto_model/urm"
+  ],
+  "native_efforts": [
+    "high"
+  ],
+  "three_explicit_high_settings": true,
+  "native_success": true,
+  "frozen_files_unchanged": true,
+  "private_reasoning_excluded": true,
+  "event_counts": {
+    "queue-operation": 2,
+    "user": 39,
+    "attachment": 42,
+    "atis-latch": 12,
+    "assistant": 78,
+    "last-prompt": 12
+  }
+}

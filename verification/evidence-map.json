@@ -1,0 +1,42 @@
+{
+  "requirements": [
+    {
+      "requirement": "65-byte compact layout / exact32 digest / secp256k1 only / RFC6979 low-S with recid parity",
+      "source": "src/ecdsa/keys.py sign_digest_recoverable_compact at1662 and _decode_compact_recoverable",
+      "result": "Independent byte-exact expected signatures across secret1/7/17 and digest0/2/n/n+1/max all pass; sign/verify/recover enforce lengths and range."
+    },
+    {
+      "requirement": "x=r and x=r+n, field/curve/infinity/subgroup validation",
+      "source": "keys.py _recover_public_point_secp256k1",
+      "result": "Both recid2/3 vectors verified against independent affine oracle and cryptography ECDSA. Noncurve,x>=p,infinity and bad scalar inputs reject. Cofactor1 excludes nontrivial wrong-subgroup inputs."
+    },
+    {
+      "requirement": "Verify ECDSA equation and recovered public key binding",
+      "source": "keys.py verify_digest_recoverable_compact899",
+      "result": "All changed recovery ids reject for same key, while legacy ECDSA verification still passes r/s; changed digest rejects."
+    },
+    {
+      "requirement": "Legacy DER/raw/recovery/allow_truncate compatible and no constant-time claim",
+      "source": "Old methods unchanged; new docstrings643/899/1662; upstream suite",
+      "result": "Independent legacy API cross-check and2038 upstream tests pass6 skip. New docstrings disclose timing limitation."
+    },
+    {
+      "requirement": "Independent tests rather than self-validation",
+      "source": "src/ecdsa/test_compact_recovery.py; native tool actions",
+      "result": "Model wrote independent affine oracle and frozen vector, ran28 tests, then complete suite. Reviewer separately ran41 independent tests and upstream regression."
+    }
+  ],
+  "process_issues": [],
+  "product_issues": [],
+  "native_final_answer_line": 184,
+  "independent_scopes": [
+    "compact-oracle-r1",
+    "compact-upstream-r2"
+  ],
+  "source_diversity_review": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\semantic-review.json",
+  "time": "2026-11-14T21:17:22+08:00",
+  "uid": 1388,
+  "frozen_commit": "d004987447b49cce40958aa6a8d2a2c1b74170e8",
+  "native_trace_sha256": "1dac015cb97e124f46037504cf6bf4b915b3e63a2355ab7530aa269a020954f1",
+  "no_model_source_changes_after_freeze": true
+}

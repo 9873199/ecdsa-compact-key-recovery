@@ -1,0 +1,37 @@
+{
+  "uid": 1388,
+  "run_id": "uf-20261114-new10-ecdsa-recovery-binding",
+  "reviewed": true,
+  "reviewer": "Codex primary AI-assisted cryptographic review",
+  "frozen_trace_sha256": "1dac015cb97e124f46037504cf6bf4b915b3e63a2355ab7530aa269a020954f1",
+  "revision": "compact-upstream-r2",
+  "product_modules": [
+    "ecdsa",
+    "ecdsa.keys"
+  ],
+  "support_files": [
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\acceptance-preparation\\run_upstream_with_openssl.py",
+      "path": "run_upstream_with_openssl.py",
+      "sha256": "b01743aae1e301379c13a4bff196be823d9e1fcc99fc7dc91836f297145b67f6"
+    }
+  ],
+  "commands": [
+    {
+      "name": "upstream-with-openssl",
+      "argv": [
+        "{python}",
+        "-B",
+        "{verification}/run_upstream_with_openssl.py",
+        "-q",
+        "src/ecdsa",
+        "--ignore=src/ecdsa/test_compact_recovery.py",
+        "-o",
+        "addopts=",
+        "-o",
+        "cache_dir={verification}/pytest-cache"
+      ],
+      "timeout": 600
+    }
+  ]
+}

@@ -1,0 +1,253 @@
+{
+  "created": "2026-11-14T21:17:22+08:00",
+  "reviewed": true,
+  "reviewer": "Codex primary AI-assisted cryptographic reviewer",
+  "uid": 1388,
+  "frozen_commit": "d004987447b49cce40958aa6a8d2a2c1b74170e8",
+  "native_trajectory_sha256": "1dac015cb97e124f46037504cf6bf4b915b3e63a2355ab7530aa269a020954f1",
+  "files": [
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\freeze.json",
+      "path": "freeze.json",
+      "sha256": "3105632b75b2f746b077ab3833da902e4acf1620f2de577d60023aa42790f30f"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\freeze-audit.json",
+      "path": "freeze-audit.json",
+      "sha256": "65327f4aecbedd31c8418958c50147dc8f7471e14d487f605a6082278cf2ead5"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\environment-reviewed.json",
+      "path": "environment-reviewed.json",
+      "sha256": "b061dea0336ecaabd7db24771abd18e0de4c56af04e6018f74c7fae34f109bec"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\evidence-map.json",
+      "path": "evidence-map.json",
+      "sha256": "a4646a4c9cce4d291aa1fbd4438d399fa03be6deb249e54f20f219f1c1734b51"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\model-final-answer.txt",
+      "path": "model-final-answer.txt",
+      "sha256": "1da09f7b55b084226df25518235e301232ad1cb7f82bbb38bc7006eadcd5e628"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\test-results.json",
+      "path": "test-results.json",
+      "sha256": "898847fec325d67461786d86643d994e10568d44834a6c2a75e1c5c990ee8a6c"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\evaluation-qc.json",
+      "path": "evaluation-qc.json",
+      "sha256": "dd90f223772a94f00b39cb33638e38a896bbf9aca176786bad12165afebace34"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-oracle-r1\\actual-import.json",
+      "path": "verification/compact-oracle-r1/actual-import.json",
+      "sha256": "c06e18ae2cc818d90d552e1268a361330fc30795a5e53eb3cc9e66f2e5842b11"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-oracle-r1\\actual-import.stderr.log",
+      "path": "verification/compact-oracle-r1/actual-import.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-oracle-r1\\actual-import.stdout.log",
+      "path": "verification/compact-oracle-r1/actual-import.stdout.log",
+      "sha256": "c0ea8d40441a7f9e22e82b7f9c5fbe97bd3dff3c8a09ff147509f4de3380490d"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-oracle-r1\\demo.py",
+      "path": "verification/compact-oracle-r1/demo.py",
+      "sha256": "5c4ce7a6b5c208baa409d6f368b8a4d68eba9425de8c4fe3de8f2809fcf6c2b4"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-oracle-r1\\dependency-lock.json",
+      "path": "verification/compact-oracle-r1/dependency-lock.json",
+      "sha256": "9008fbdbf9a6b8eb8e4ba05935c509893649592fb3fc51e76a678f576087a0e6"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-oracle-r1\\dependency-lock.stderr.log",
+      "path": "verification/compact-oracle-r1/dependency-lock.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-oracle-r1\\dependency-lock.stdout.log",
+      "path": "verification/compact-oracle-r1/dependency-lock.stdout.log",
+      "sha256": "7ef7392d497c1b9f0fa8ea19c21f22c1e73f104831c9cfb0e40d5d5e24b12883"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-oracle-r1\\existing-suite-regression.json",
+      "path": "verification/compact-oracle-r1/existing-suite-regression.json",
+      "sha256": "0672aa9ebde8c25d945cb08f5c0db4c7e23b4e91367ee7660d589c4470d9c360"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-oracle-r1\\existing-suite-regression.stderr.log",
+      "path": "verification/compact-oracle-r1/existing-suite-regression.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-oracle-r1\\existing-suite-regression.stdout.log",
+      "path": "verification/compact-oracle-r1/existing-suite-regression.stdout.log",
+      "sha256": "b9991329081efb8a4bd4c54522745d748b2151319480cdac1dca8d6c14c564b7"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-oracle-r1\\independent-compact-oracle.json",
+      "path": "verification/compact-oracle-r1/independent-compact-oracle.json",
+      "sha256": "649dbd657f673f922d9fd8de201de9ee3761c3e07ba27ca8762a3dea67be4224"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-oracle-r1\\independent-compact-oracle.stderr.log",
+      "path": "verification/compact-oracle-r1/independent-compact-oracle.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-oracle-r1\\independent-compact-oracle.stdout.log",
+      "path": "verification/compact-oracle-r1/independent-compact-oracle.stdout.log",
+      "sha256": "fcfc068603ec6e59e8bbe311be46f0c83abff13c2265ec26a60456d528da645f"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-oracle-r1\\model-compact-tests.json",
+      "path": "verification/compact-oracle-r1/model-compact-tests.json",
+      "sha256": "660aa2b3d4da359403a95e70af93c39fc9947e600456f520239d01c97d9926b6"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-oracle-r1\\model-compact-tests.stderr.log",
+      "path": "verification/compact-oracle-r1/model-compact-tests.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-oracle-r1\\model-compact-tests.stdout.log",
+      "path": "verification/compact-oracle-r1/model-compact-tests.stdout.log",
+      "sha256": "2c58ab1074bcd36e0a5e5a4b05c05215870ba9c2be4a05083787a917717b1288"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-oracle-r1\\replay-proof.json",
+      "path": "verification/compact-oracle-r1/replay-proof.json",
+      "sha256": "1b80dba079e48d6243562f4f1d1ad99dc8296a5201b552baecf1b4aee96ec939"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-oracle-r1\\reproduction-notes.md",
+      "path": "verification/compact-oracle-r1/reproduction-notes.md",
+      "sha256": "a478021fae7f99b790d0029cf120ce6dddbe1a9ddb3159b22ae9feb0e5bcc7f2"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-oracle-r1\\reviewed-spec.json",
+      "path": "verification/compact-oracle-r1/reviewed-spec.json",
+      "sha256": "e33ee3ed7543672da93e38bcc8a010d8584276d2fc03845fba7da56e2d20b1d0"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-oracle-r1\\secp256k1_oracle.py",
+      "path": "verification/compact-oracle-r1/secp256k1_oracle.py",
+      "sha256": "f665f66dd691b32b45da5af0c95183bce442fa1cdfc66d812fa326f66a69239e"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-oracle-r1\\test_compact_signature_review.py",
+      "path": "verification/compact-oracle-r1/test_compact_signature_review.py",
+      "sha256": "c00a2995271445d0c6cbd87736daa460689204616526b7c2b06fe22aed3d58b3"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-upstream-r2\\actual-import.json",
+      "path": "verification/compact-upstream-r2/actual-import.json",
+      "sha256": "a0e9d3c9680f0ec7c0efd89bdc4bd75a43dd296e6a9f2014958e3db9d8e54b88"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-upstream-r2\\actual-import.stderr.log",
+      "path": "verification/compact-upstream-r2/actual-import.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-upstream-r2\\actual-import.stdout.log",
+      "path": "verification/compact-upstream-r2/actual-import.stdout.log",
+      "sha256": "2b16e0c15b316d65cc3d7ae36b9eb9db3fd4bb01f0ecc7cd0111a3fa33ca6ac1"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-upstream-r2\\dependency-lock.json",
+      "path": "verification/compact-upstream-r2/dependency-lock.json",
+      "sha256": "40195c7bb829029c243a80a0b56c87fbd46b9fad44750cb4e89f338544948b94"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-upstream-r2\\dependency-lock.stderr.log",
+      "path": "verification/compact-upstream-r2/dependency-lock.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-upstream-r2\\dependency-lock.stdout.log",
+      "path": "verification/compact-upstream-r2/dependency-lock.stdout.log",
+      "sha256": "7ef7392d497c1b9f0fa8ea19c21f22c1e73f104831c9cfb0e40d5d5e24b12883"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-upstream-r2\\replay-proof.json",
+      "path": "verification/compact-upstream-r2/replay-proof.json",
+      "sha256": "590c94c8d91b1badfa2a88a4f49881d19e6212ebde3caf139fc325a3a54886c3"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-upstream-r2\\reviewed-spec.json",
+      "path": "verification/compact-upstream-r2/reviewed-spec.json",
+      "sha256": "60f8eff6520c8aa6fb9dd57afd0f8988199dd0367e481429041f015435d594da"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-upstream-r2\\run_upstream_with_openssl.py",
+      "path": "verification/compact-upstream-r2/run_upstream_with_openssl.py",
+      "sha256": "b01743aae1e301379c13a4bff196be823d9e1fcc99fc7dc91836f297145b67f6"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-upstream-r2\\upstream-with-openssl.json",
+      "path": "verification/compact-upstream-r2/upstream-with-openssl.json",
+      "sha256": "7cd9c03a17978888603e8c4047d298709ec8bb6d584bfcb1ce07327ea61ee2fb"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-upstream-r2\\upstream-with-openssl.stderr.log",
+      "path": "verification/compact-upstream-r2/upstream-with-openssl.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-upstream-r2\\upstream-with-openssl.stdout.log",
+      "path": "verification/compact-upstream-r2/upstream-with-openssl.stdout.log",
+      "sha256": "e54bbdd2f4c85f83cffd8932ea0aae6e1b191dbdb57d639738e1e702bd9fe223"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\recorded-runtime-r1\\actual-commands.json",
+      "path": "verification/recorded-runtime-r1/actual-commands.json",
+      "sha256": "4262be810ac4185fc43cccb65d8daeb63dd2296cd4db96c3e33e9ccd56a15e6c"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\recorded-runtime-r1\\actual-keystrokes.json",
+      "path": "verification/recorded-runtime-r1/actual-keystrokes.json",
+      "sha256": "0c1e293dca27ea77b9f8259ffc2d4090793bce002ea92f6320b20836fa2fd5f5"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\recorded-runtime-r1\\recording-status.json",
+      "path": "verification/recorded-runtime-r1/recording-status.json",
+      "sha256": "e5727f7d512264d057852c645ff7a5a89cd13d50410c17afa7e917441c3c07e3"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\recorded-runtime-r1\\runtime-output.log",
+      "path": "verification/recorded-runtime-r1/runtime-output.log",
+      "sha256": "d31c1d7a300e94bfa7e7b6ad9c26cc18088ad863b6bbbe03f0af1ed27c99eeea"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\recorded-runtime-r1\\spec.json",
+      "path": "verification/recorded-runtime-r1/spec.json",
+      "sha256": "231178d5f363d4325570767481aec16da31123f12de215b70a2052296aa27f93"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\recorded-runtime-r1\\typing-check.json",
+      "path": "verification/recorded-runtime-r1/typing-check.json",
+      "sha256": "a2b6e09aefaa55a63582e896b73cfabec3046abc71abe4108928f1fb652a3913"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-upstream-r2\\pytest-cache\\README.md",
+      "path": "verification/compact-upstream-r2/pytest-cache/README.md",
+      "sha256": "73fd6fccdd802c419a6b2d983d6c3173b7da97558ac4b589edec2dfe443db9ad"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-oracle-r1\\pytest-cache\\README.md",
+      "path": "verification/compact-oracle-r1/pytest-cache/README.md",
+      "sha256": "73fd6fccdd802c419a6b2d983d6c3173b7da97558ac4b589edec2dfe443db9ad"
+    }
+  ],
+  "reproduction_readme": "# Compact recoverable signature verification\n\nPost-session AI-assisted review, separate from original model tests. Python3.14.3; exact dependency locks and source import paths retained. compact-oracle-r1: python -B -m pytest -q test_compact_signature_review.py =>41 pass, independent HMAC RFC6979 plus affine secp256k1 and cryptography cross-check; model added28 pass. compact-upstream-r2: python -B run_upstream_with_openssl.py -q src/ecdsa --ignore=src/ecdsa/test_compact_recovery.py -o addopts= =>2038 pass6 skip4 upstream warnings. Set PATH to a local OpenSSL installation; reviewed Windows Git OpenSSL3.5.5 used here. First all-suite collection failed for missing openssl.exe (2 errors); original logs retained, excluded from product scoring. Scopes overlap and are not summed. No service, container or external TSA/network needed. Test keys are offline/generated and no secret printed.\n\nUse the matching frozen source commit; put its src and selected verification directory on PYTHONPATH. The75-second recording is openly automated; actual keystrokes, whole-word repair and program output retained. No source edits after freeze; no automatic submission.\n",
+  "no_model_source_edits": true,
+  "native_trace_included": false
+}

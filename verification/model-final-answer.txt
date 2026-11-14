@@ -1,0 +1,25 @@
+完成。全部测试通过（2066 passed, 6 skipped），flake8 与 black（line-length 79）均无告警。
+
+## 改动内容
+
+**`src/ecdsa/keys.py`** — 新增三个公开接口和两个内部辅助函数：
+
+- `SigningKey.sign_digest_recoverable_compact(digest, hashfunc=None, extra_entropy=b"")`
+  走现有 RFC6979 路径（`rfc6979.generate_k` + `sign_number`），输出 65 字节：`rec_id(1) ‖ r(32 BE) ‖ s(32 BE)`。rec_id 的 bit0 是临时点 y 奇偶、bit1 是 `x = r + j·n` 分支。当 `s > n/2` 时换成 `n−s` 并同步 `rec_id ^= 1`，保证签名始终恢复出本密钥，不会出现"验签通过但恢复成另一把公钥"。
+- `VerifyingKey.verify_digest_recoverable_compact(signature, digest)`
+  先完整恢复公钥点，再检查 ECDSA 等式（`pubkey.verifies`），最后确认恢复出的点就是本密钥——改掉首字节即使 r/s 不变也会抛 `BadSignatureError`。
+- `VerifyingKey.from_recoverable_compact_signature(signature, digest, hashfunc=sha256)`
+  从 65 字节签名恢复出 secp256k1 验证公钥。
+- 内部：`_decode_compact_recoverable`（精确 65/32 字节长度、rec_id ≤ 3、`1 ≤ r,s < n`、拒绝 high-S）和 `_recover_public_point_secp256k1`（两个 `x = r + j·n` 分支；拒绝 x 超出域、非曲线点（`SquareRootError`）、非子群点、恢复结果为无穷远）。
+
+三个接口都只接受 secp256k1（其他曲线抛 `ValueError`）、只接受精确长度输入；文档字符串明确注明**不是**恒定时间实现。旧 DER/raw/`allow_truncate`/`from_public_key_recovery*` 路径未动。
+
+**`src/ecdsa/test_compact_recovery.py`** — 28 个测试，避免自证：
+
+- 文件内置一个独立的仿射坐标 secp256k1 实现（费马求逆、`(p+1)/4` 开方），用它独立计算期望值：恢复点比对、rec_id 与独立计算的 `k·G` 比对、s 翻转语义核验。
+- 与现有接口交叉验证：`verify_digest(sig[1:], digest)`、`sign_digest_deterministic` 的 r/s（模 low-S）一致性、旧 `from_public_key_recovery_with_digest` 仍找回同一密钥。
+- `x = r + n` 分支：用独立实现专门构造 rec_id=2 和 3 的合成样本（反里包含构造出的公钥），验证恢复与验签。
+- 覆盖：s 翻转（high-S 被新接口拒绝但经典接口接受，证明绑定必要）、首字节篡改（遍历其余 3 个 rec_id）、r/s 单字节篡改、摘要变化、畸形长度（0/1/64/66/130 字节签名，0/31/33 字节摘要）、r/s 为零或 ≥ n、rec_id > 3、`x = r + n ≥ p`、x 非曲线点、恢复点为无穷远（构造 `s = e·k⁻¹`）、非 secp256k1 曲线拒绝。
+- 一个冻结回归向量（固定测试私钥 + 固定摘要），并用独立实现核验。
+
+测试只使用为测试生成的离线密钥，未涉及任何钱包/交易系统。

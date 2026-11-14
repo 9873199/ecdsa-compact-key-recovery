@@ -1,0 +1,20 @@
+{
+  "time": "2026-11-14T21:07:15+08:00",
+  "argv": [
+    "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\tasks\\python-ecdsa\\env\\Scripts\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "src/ecdsa",
+    "--ignore=src/ecdsa/test_compact_recovery.py",
+    "-o",
+    "addopts=",
+    "-o",
+    "cache_dir=D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-oracle-r1/pytest-cache"
+  ],
+  "cwd": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-oracle-r1\\replay-source",
+  "exit_code": 2,
+  "stdout_log": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-oracle-r1\\existing-suite-regression.stdout.log",
+  "stderr_log": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-oracle-r1\\existing-suite-regression.stderr.log"
+}

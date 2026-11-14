@@ -1,0 +1,19 @@
+{
+  "time": "2026-11-14T21:13:53+08:00",
+  "argv": [
+    "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\tasks\\python-ecdsa\\env\\Scripts\\python.exe",
+    "-B",
+    "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-upstream-r2/run_upstream_with_openssl.py",
+    "-q",
+    "src/ecdsa",
+    "--ignore=src/ecdsa/test_compact_recovery.py",
+    "-o",
+    "addopts=",
+    "-o",
+    "cache_dir=D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-upstream-r2/pytest-cache"
+  ],
+  "cwd": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-upstream-r2\\replay-source",
+  "exit_code": 0,
+  "stdout_log": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-upstream-r2\\upstream-with-openssl.stdout.log",
+  "stderr_log": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-upstream-r2\\upstream-with-openssl.stderr.log"
+}

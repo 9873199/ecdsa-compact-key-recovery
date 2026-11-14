@@ -1,0 +1,19 @@
+{
+  "time": "2026-11-14T21:07:09+08:00",
+  "argv": [
+    "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\tasks\\python-ecdsa\\env\\Scripts\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "src/ecdsa/test_compact_recovery.py",
+    "-o",
+    "addopts=",
+    "-o",
+    "cache_dir=D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-oracle-r1/pytest-cache"
+  ],
+  "cwd": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-oracle-r1\\replay-source",
+  "exit_code": 0,
+  "stdout_log": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-oracle-r1\\model-compact-tests.stdout.log",
+  "stderr_log": "D:\\hc\\userFeedback\\cache\\security-ten-20261114-r1\\evaluation\\uf-20261114-new10-ecdsa-recovery-binding\\verification\\compact-oracle-r1\\model-compact-tests.stderr.log"
+}

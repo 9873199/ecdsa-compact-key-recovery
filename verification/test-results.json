@@ -1,0 +1,21 @@
+{
+  "independent_oracle": {
+    "passed": 41,
+    "failed": 0
+  },
+  "model_added_replay": {
+    "passed": 28,
+    "failed": 0
+  },
+  "upstream_excluding_model_added": {
+    "passed": 2038,
+    "skipped": 6,
+    "failed": 0,
+    "warnings": 4
+  },
+  "initial_reviewer_missing_openssl": {
+    "collection_errors": 2,
+    "excluded_from_product_score": true
+  },
+  "not_summed": true
+}

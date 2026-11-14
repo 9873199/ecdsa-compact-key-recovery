@@ -1,0 +1,50 @@
+OpenSSL 3.5.5 27 Jan 2026 (Library: OpenSSL 3.5.5 27 Jan 2026)
+
+........................................................................ [  3%]
+........................................................................ [  7%]
+........................................................................ [ 10%]
+..........................ss............................................ [ 14%]
+.....ss................................................................. [ 17%]
+........................................................................ [ 21%]
+........................................................................ [ 24%]
+...................................................................s.... [ 28%]
+........................................................................ [ 31%]
+........................................................................ [ 35%]
+........................................................................ [ 38%]
+........................................................................ [ 42%]
+........................................................................ [ 45%]
+........................................................................ [ 49%]
+........................................................................ [ 52%]
+........................................................................ [ 56%]
+........................................................................ [ 59%]
+........................................................................ [ 63%]
+........................................................................ [ 66%]
+........................................................................ [ 70%]
+........................................................................ [ 73%]
+........................................................................ [ 77%]
+........................................................................ [ 81%]
+........................................................................ [ 84%]
+........................................................................ [ 88%]
+........................................................................ [ 91%]
+........................................................................ [ 95%]
+........................................................................ [ 98%]
+...............s............                                             [100%]
+============================== warnings summary ===============================
+src/ecdsa/test_malformed_sigs.py::test_fuzzed_der_signatures
+  D:\hc\userFeedback\cache\security-ten-20261114-r1\tasks\python-ecdsa\env\Lib\site-packages\hypothesis\strategies\_internal\lazy.py:187: HypothesisWarning: Generating overly large repr. This is an expensive operation, and with a length of 98 kB is unlikely to be useful. Use -Wignore to ignore the warning, or -Werror to get a traceback.
+    self.__representation = repr_call(
+
+src/ecdsa/test_malformed_sigs.py::test_fuzzed_string_signatures
+  D:\hc\userFeedback\cache\security-ten-20261114-r1\tasks\python-ecdsa\env\Lib\site-packages\hypothesis\strategies\_internal\lazy.py:187: HypothesisWarning: Generating overly large repr. This is an expensive operation, and with a length of 95 kB is unlikely to be useful. Use -Wignore to ignore the warning, or -Werror to get a traceback.
+    self.__representation = repr_call(
+
+src/ecdsa/test_numbertheory.py::TestNumbertheory::test_gcd_with_com_factor
+  C:\Users\Administrator\AppData\Local\Programs\Python\Python314\Lib\contextlib.py:148: HypothesisDeprecationWarning: Do not use the `random` module inside strategies; instead consider `st.randoms()`, `st.sampled_from()`, etc.  from numbers=st_comp_with_com_fac()
+    next(self.gen)
+
+src/ecdsa/test_numbertheory.py::TestNumbertheory::test_gcd_with_uncom_factor
+  C:\Users\Administrator\AppData\Local\Programs\Python\Python314\Lib\contextlib.py:148: HypothesisDeprecationWarning: Do not use the `random` module inside strategies; instead consider `st.randoms()`, `st.sampled_from()`, etc.  from numbers=st_comp_no_com_fac()
+    next(self.gen)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+2038 passed, 6 skipped, 4 warnings in 41.03s
